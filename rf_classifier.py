@@ -92,7 +92,7 @@ for i in range(1,20):
 for i in range(1,50):
     max_depth_of_tree_list.append(i)
 
-param_grid = {'n_estimators' = number_of_trees_list, 'max_features' = max_features_list, 'max_depth' = max_depth_of_tree_list, 'max_leaf_nodes' = max_number_of_leafnodes_list, 'min_samples_leaf' = min_sample_leaf_list}
+param_grid = {'n_estimators' : number_of_trees_list, 'max_features' : max_features_list, 'max_depth' : max_depth_of_tree_list, 'max_leaf_nodes' : max_number_of_leafnodes_list, 'min_samples_leaf' : min_sample_leaf_list}
 rf = RandomForestClassifier(n_jobs=-1, oob_score=True, random_state=25)
 
 CV_rf = GridSearchCV(estimator = rf, param_grid = param_grid, cv = 5)
