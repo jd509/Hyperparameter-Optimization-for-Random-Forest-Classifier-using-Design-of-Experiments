@@ -79,23 +79,30 @@ print(confusion_matrix)
 print(classification_report)
 
 
+number_of_trees_list = []
+max_features_list = []
+max_number_of_leafnodes_list = []
+min_sample_leaf_list = []
+max_depth_of_tree_list = []
 # hyper parameter tuning
-for i in range(1,500):
+for i in range(10,500):
     number_of_trees_list.append(i)
 
 max_features_list = ['sqrt', 'log2']
 
-for i in range(1,20):
+for i in range(2,20):
     max_number_of_leafnodes_list.append(i)
-    min_sample_leaf_list.append(i)
 
-for i in range(1,50):
+for i in range(2,50):
     max_depth_of_tree_list.append(i)
+
+for i in range(1,20):
+    min_sample_leaf_list.append(i)
 
 param_grid = {'n_estimators' : number_of_trees_list, 'max_features' : max_features_list, 'max_depth' : max_depth_of_tree_list, 'max_leaf_nodes' : max_number_of_leafnodes_list, 'min_samples_leaf' : min_sample_leaf_list}
 rf = RandomForestClassifier(n_jobs=-1, oob_score=True, random_state=25)
 
-CV_rf = GridSearchCV(estimator = rf, param_grid = param_grid, cv = 5)
+CV_rf = GridSearchCV(estimator = rf, param_grid = param_grid, cv = 5, verbose=10)
 CV_rf.fit(x_train, y_train)
 
 best_params = CV_rf.best_params_
